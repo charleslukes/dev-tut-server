@@ -1,0 +1,20 @@
+#import Article from 'article.graphql';
+#import Stack from 'stack.graphql'
+
+"""
+This defines the details of the users(devs)
+"""
+type User {
+  id: ID!
+  firstname: String!
+  lastname: String!
+  email: String!
+  bio: String!
+  gitHubUrl: String
+  country: String
+  articles: [Article]
+  stacks: [Stack!]
+
+  # This will be a link to a url
+  image: String
+}
