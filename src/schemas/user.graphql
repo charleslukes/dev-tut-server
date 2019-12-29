@@ -11,7 +11,7 @@ type User {
   email: String!
   bio: String!
   gitHubUrl: String
-  country: String
+  country: String!
   articles: [Article]
   stacks: [Stack!]
 
