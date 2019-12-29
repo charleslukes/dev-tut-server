@@ -2,6 +2,26 @@
 # import Article from 'article.graphql'
 
 type Query {
+  getUser(id: ID!): User
   getUsers: [User!]
   getArticles: [Article!]
+}
+
+type Mutation {
+  createUser(
+    firstname: String!
+    lastname: String!
+    email: String!
+    country: String!
+  ): User
+
+  updateUser(
+    firstname: String
+    lastname: String
+    email: String
+    country: String
+    id: ID!
+  ): User
+
+  deleteUser(id: ID!): User
 }
