@@ -19,8 +19,8 @@ module.exports.userResolver = {
 
   Mutation: {
     createUser: (_, args) => {
-      const { firstname, lastname, email, country } = args;
-      const data = createUser(firstname, lastname, email, country);
+      const { firstname, lastname, email, country, password } = args;
+      const data = createUser(firstname, lastname, email, country, password);
 
       return data;
     },
