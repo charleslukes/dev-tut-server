@@ -9,11 +9,14 @@ type User {
   firstname: String!
   lastname: String!
   email: String!
+  password: String
   bio: String!
   gitHubUrl: String
-  country: String!
+  country: String
   articles: [Article]
-  stacks: [Stack!]
+
+  #contains all the names of programming language the user does
+  stacks: [String]
 
   # This will be a link to a url
   image: String
