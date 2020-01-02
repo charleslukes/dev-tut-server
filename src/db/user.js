@@ -1,13 +1,13 @@
 const pool = require("./index");
 
 // create a user
-const createUser = async (firstname, lastname, email, country) => {
+const createUser = async (firstname, lastname, email, country, password) => {
   try {
     const user = await pool.query(
-      "INSERT INTO users (firstname, lastname, email, country) VALUES ($1, $2, $3, $4)",
-      [firstname, lastname, email, country]
+      "INSERT INTO users (firstname, lastname, email, country, password) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [firstname, lastname, email, country, password]
     );
-
+    console.log(user);
     return user.rows[0];
   } catch (error) {
     console.log(error);
