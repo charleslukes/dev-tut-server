@@ -15,6 +15,20 @@ const createUser = async (firstname, lastname, email, country, password) => {
   }
 };
 
+// sign in a user
+const userSignIn = async (email, password) => {
+  try {
+    const user = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email
+    ]);
+
+    return user.rows[0];
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 //get all users
 const getAllUsers = async () => {
   try {
@@ -71,6 +85,7 @@ const deleteUser = async id => {
 
 module.exports = {
   createUser,
+  userSignIn,
   getAllUsers,
   getUser,
   updateUser,
