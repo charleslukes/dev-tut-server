@@ -3,7 +3,8 @@ const {
   getAllUsers,
   getUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  userSignIn
 } = require("../db/user");
 
 module.exports.userResolver = {
@@ -23,6 +24,10 @@ module.exports.userResolver = {
       const data = createUser(firstname, lastname, email, country, password);
 
       return data;
+    },
+    signInUser: (_, args) => {
+      const { email, password } = args;
+      return userSignIn(email, password);
     },
 
     updateUser: (_, args) => {
