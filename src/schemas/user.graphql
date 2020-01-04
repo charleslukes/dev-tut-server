@@ -18,6 +18,8 @@ type User {
   #contains all the names of programming language the user does
   stacks: [String]
 
+  # message of the user current activity
+  message: String
   # This will be a link to a url
   image: String
 }

@@ -1,13 +1,18 @@
 const pool = require("./index");
+const bcrypt = require("bcrypt");
 
 // create a user
 const createUser = async (firstname, lastname, email, country, password) => {
+  // hash password
+  const salt = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hash(password, salt);
+
   try {
     const user = await pool.query(
       "INSERT INTO users (firstname, lastname, email, country, password) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [firstname, lastname, email, country, password]
+      [firstname, lastname, email, country, hashPassword]
     );
-    console.log(user);
+
     return user.rows[0];
   } catch (error) {
     console.log(error);
@@ -22,7 +27,15 @@ const userSignIn = async (email, password) => {
       email
     ]);
 
-    return user.rows[0];
+    const userPassword = user.rows[0].password;
+    const comparePassword = await bcrypt.compare(password, userPassword);
+
+    if (comparePassword) {
+      const user = user.rows[0];
+      return { ...user, message: `Welcome ${user.firstname}` };
+    } else {
+      return { message: "Email or Password Incorrect" };
+    }
   } catch (error) {
     console.log(error);
     return error;
