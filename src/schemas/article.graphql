@@ -1,0 +1,9 @@
+#import User from 'user.graphql'
+
+type Article {
+  id: ID!
+  title: String!
+  details: String!
+  stack: String!
+  writter: User
+}
